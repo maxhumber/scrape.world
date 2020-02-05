@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Datatables Example</title>
+  <meta charset="utf-8">
+  <!-- DataTables -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"/>
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+  <script>
+    function setupData() {
+      $(document).ready(function () {
+        $('#hockey').DataTable({
+          "ajax": {
+            "url": "/index_get_data",
+            "dataType": "json",
+            "dataSrc": "data",
+            "contentType": "application/json"
+          },
+          "columns": [
+            {"data": "date"},
+            {"data": "team"},
+            {"data": "opponent"},
+            {"data": "outcome"}
+          ]
+        });
+      });
+    }
+    $( window ).on( "load", setupData );
+  </script>
+</head>
+<body>
+  <h1>DataTables Example</h1>
+  <table id="hockey" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+      <tr>
+        <th>date</th>
+        <th>team</th>
+        <th>opponent</th>
+        <th>outcome</th>
+      </tr>
+    </thead>
+  </table>
+</body>
+</html>
