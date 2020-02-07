@@ -23,6 +23,18 @@ SimpleLogin(app, login_checker=check_my_users)
 def index():
     return render_template('index.html')
 
+@app.route('/soup')
+def soup():
+    return render_template('soup.html')
+
+@app.route('/caps')
+def caps():
+    return render_template('caps.html')
+
+@app.route('/points')
+def points():
+    return render_template('points.html')
+
 @app.route('/secret')
 @login_required()
 def secret():
