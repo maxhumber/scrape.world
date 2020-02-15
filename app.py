@@ -57,10 +57,11 @@ def results_data():
 
 @app.route('/books')
 def books():
+    sale = [0.8, 0.2]
     price = {
-        'early': random.choices([28, 0], weights=[0.8, 0.2])[0],
-        'filthy': random.choices([15, 0], weights=[0.8, 0.2])[0],
-        'orconomics': random.choices([20, 0], weights=[0.8, 0.2])[0]
+        'early': random.choices([28, 0], weights=sale)[0],
+        'filthy': random.choices([15, 0], weights=sale)[0],
+        'orconomics': random.choices([20, 0], weights=sale)[0]
     }
     return render_template('books.html', price=price)
 
