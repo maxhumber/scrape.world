@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Books{% endblock %}
+{% block content %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#button1").click(function(){
+      $("#div1").load("static/early.txt");
+    });
+  });
+
+  $(document).ready(function(){
+    $("#button2").click(function(){
+      $("#div2").load("static/filthy.txt");
+    });
+  });
+
+  $(document).ready(function(){
+    $("#button3").click(function(){
+      $("#div3").load("static/orconomics.txt");
+    });
+  });
+</script>
+<div class="book-early">
+  <img src="{{url_for('static', filename='early.jpg')}}" width=100 />
+  <h4>Early Riser</h4>
+  <p>${{ price.early }}.99 CAD</p>
+  <div id="div1"></div>
+  <button id="button1">More Info</button>
+</div>
+<br />
+<div class="book-filthy">
+  <img src="{{url_for('static', filename='filthy.jpg')}}" width=100 />
+  <h4>How to Get Filthy Rich in Rising Asia</h4>
+  <p>${{ price.filthy }}.99 CAD</p>
+  <div id="div2"></div>
+  <button id="button2">More Info</button>
+</div>
+<br />
+<div class="book-orconimics">
+  <img src="{{url_for('static', filename='orconomics.jpg')}}" width=100 />
+  <h4>Orconomics</h4>
+  <p>${{ price.orconomics }}.99 CAD</p>
+  <div id="div3"></div>
+  <button id="button3">More Info</button>
+</div>
+{% endblock %}

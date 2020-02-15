@@ -1,27 +1,25 @@
+import random
+
 from flask import Flask, jsonify, render_template
 from flask_simplelogin import SimpleLogin, login_required
 import pandas as pd
 
-USERS = {
-    'max': {'password': 'gazpacho'},
-    'admin': {'password': 'admin'}
-}
-
-def check_my_users(user):
-    user_data = USERS.get(user['username'])
-    if not user_data:
-        return False
-    elif user_data.get('password') == user['password']:
-        return True
-    return False
+import config
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'super-secret-secret'
-SimpleLogin(app, login_checker=check_my_users)
+app.config['SECRET_KEY'] = config.secret
+SimpleLogin(app, login_checker=config.login_checker)
+
+# home
 
 @app.route('/')
+@app.route('/home')
 def index():
     return render_template('index.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
 
 # basics
 
@@ -33,40 +31,44 @@ def soup():
 def titans():
     return render_template('titans.html')
 
-# sports: pesky pages
+# pesky pages: sports
 
-@app.route('/caps')
-def caps():
-    return render_template('caps.html')
+@app.route('/spend')
+@login_required() # protected
+def spend():
+    return render_template('spend.html')
 
-@app.route('/points')
-def points():
-    return render_template('points.html')
-
-@app.route('/secret')
-@login_required()
-def secret():
-    return render_template('secret.html')
+@app.route('/season')
+@login_required() # protected
+def season():
+    return render_template('season.html')
 
 @app.route('/results')
-def dt():
+def results():
     return render_template('results.html')
 
 @app.route('/results_data')
-def stuff():
+def results_data():
     df = pd.read_csv('data/hockey.csv')
     data = {'data': df.to_dict(orient='records')}
     return jsonify(data)
+
+# schedule: books
+
+@app.route('/books')
+def books():
+    price = {
+        'early': random.choices([28, 0], weights=[0.8, 0.2])[0],
+        'filthy': random.choices([15, 0], weights=[0.8, 0.2])[0],
+        'orconomics': random.choices([20, 0], weights=[0.8, 0.2])[0]
+    }
+    return render_template('books.html', price=price)
 
 @app.route('/fish')
 def fish():
     return render_template('fish.html')
 
 
-
-@app.route('/click')
-def click():
-    return render_template('click.html')
 
 @app.route('/scroll')
 def scroll():

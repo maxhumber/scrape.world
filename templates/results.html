@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Index{% endblock %}
+{% block title %}Results{% endblock %}
 {% block content %}
 <!-- DataTables -->
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"/>
@@ -10,7 +10,7 @@
 <script>
   function setupData() {
     $(document).ready(function () {
-      $('#hockey').DataTable({
+      $('#results_table').DataTable({
         "ajax": {
           "url": "/results_data",
           "dataType": "json",
@@ -30,8 +30,9 @@
   }
   $( window ).on( "load", setupData );
 </script>
-<h1>DataTables Example</h1>
-<table id="hockey" class="table table-striped table-bordered" style="width:100%">
+<h3>Game Results</h3>
+<br />
+<table id="results_table" class="table table-striped table-bordered" style="width:100%">
   <thead>
     <tr>
       <th>day</th>
