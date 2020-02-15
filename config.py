@@ -1,8 +1,11 @@
+# Hi GitHub :)
+
 secret = 'super-secret-secret'
 
 users = {
-    'max': {'password': 'gazpacho'},
-    'admin': {'password': 'admin'}
+    'admin': {'password': 'admin'},
+    'oreilly': {'password': 'letmescrape'},
+    'max': {'password': 'i-like-gazpacho'},
 }
 
 def login_checker(user):
