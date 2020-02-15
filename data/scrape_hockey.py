@@ -1,4 +1,10 @@
 import re
+from gazpacho import get, Soup
+import pandas as pd
+import numpy as np
+
+url = 'https://www.hockey-reference.com/leagues/NHL_2020_games.html'
+html = get(url)
 
 d = {
     'Boston Bruins': 'Boston Kodiaks',
@@ -34,10 +40,24 @@ d = {
     'Los Angeles Kings': 'Los Angeles Monarchs'
 }
 
-def replace(file='caps'):
-    pattern = re.compile(r'\b(' + '|'.join(d.keys()) + r')\b')
-    with open(f'templates/{file}.html', 'r') as f:
-        s = f.read()
-    s = pattern.sub(lambda x: d[x.group()], s)
-    with open(f'templates/{file}.html', 'w') as f:
-        f.write(s)
+pattern = re.compile(r'\b(' + '|'.join(d.keys()) + r')\b')
+html = pattern.sub(lambda x: d[x.group()], html)
+soup = Soup(html)
+table = soup.find('table', {'id': 'games'})
+
+df = pd.read_html(str(table))[0]
+df = df.rename(columns={
+    'Date': 'date',
+    'Visitor': 'away',
+    'Home': 'home',
+    'G': 'goals_away',
+    'G.1': 'goals_home',
+    'Unnamed: 5': 'extra_time_loss'
+})
+df = df.dropna(subset=['goals_away'])
+df['extra_time_loss'] = ~df['extra_time_loss'].isna()
+df['extra_time_loss'] = df['extra_time_loss'].apply(int)
+df['date'] = df['date'].apply(pd.to_datetime)
+df['day'] = df['date'].apply(lambda x: (x - pd.Timestamp('2019-10-02')).days + 1)
+df = df[['day', 'away', 'goals_away', 'home', 'goals_home', 'extra_time_loss']]
+df.to_csv('data/hockey.csv', index=False)

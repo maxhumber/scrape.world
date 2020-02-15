@@ -23,9 +23,17 @@ SimpleLogin(app, login_checker=check_my_users)
 def index():
     return render_template('index.html')
 
+# basics
+
 @app.route('/soup')
 def soup():
     return render_template('soup.html')
+
+@app.route('/titans')
+def titans():
+    return render_template('titans.html')
+
+# sports: pesky pages
 
 @app.route('/caps')
 def caps():
@@ -40,19 +48,13 @@ def points():
 def secret():
     return render_template('secret.html')
 
-@app.route('/dt')
+@app.route('/results')
 def dt():
-    return render_template('datatable.html')
+    return render_template('results.html')
 
-df = pd.read_csv('data/hockey.csv')
-df = (df
-    [['date', 'team', 'opponent', 'outcome']]
-    .drop_duplicates()
-    .reset_index(drop=True)
-)
-
-@app.route('/index_get_data')
+@app.route('/results_data')
 def stuff():
+    df = pd.read_csv('data/hockey.csv')
     data = {'data': df.to_dict(orient='records')}
     return jsonify(data)
 
@@ -60,9 +62,23 @@ def stuff():
 def fish():
     return render_template('fish.html')
 
-@app.route('/titans')
-def titans():
-    return render_template('titans.html')
+
+
+@app.route('/click')
+def click():
+    return render_template('click.html')
+
+@app.route('/scroll')
+def scroll():
+    return render_template('scroll.html')
+
+@app.route('/scroll2')
+def scroll2():
+    return render_template('scroll2.html')
+
+@app.route('/scroll3')
+def scroll3():
+    return render_template('scroll3.html')
 
 if __name__ == '__main__':
     app.run(port=5000, use_reloader=True, debug=True)

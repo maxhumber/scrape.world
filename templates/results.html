@@ -12,16 +12,18 @@
     $(document).ready(function () {
       $('#hockey').DataTable({
         "ajax": {
-          "url": "/index_get_data",
+          "url": "/results_data",
           "dataType": "json",
           "dataSrc": "data",
           "contentType": "application/json"
         },
         "columns": [
-          {"data": "date"},
-          {"data": "team"},
-          {"data": "opponent"},
-          {"data": "outcome"}
+          {"data": "day"},
+          {"data": "away"},
+          {"data": "goals_away"},
+          {"data": "home"},
+          {"data": "goals_home"},
+          {"data": "extra_time_loss"}
         ]
       });
     });
@@ -32,10 +34,12 @@
 <table id="hockey" class="table table-striped table-bordered" style="width:100%">
   <thead>
     <tr>
-      <th>date</th>
-      <th>team</th>
-      <th>opponent</th>
-      <th>outcome</th>
+      <th>day</th>
+      <th>away</th>
+      <th>goals_away</th>
+      <th>home</th>
+      <th>goals_home</th>
+      <th>extra_time_loss</th>
     </tr>
   </thead>
 </table>
