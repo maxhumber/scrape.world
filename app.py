@@ -13,7 +13,6 @@ SimpleLogin(app, login_checker=config.login_checker)
 # home
 
 @app.route('/')
-@app.route('/home')
 def index():
     return render_template('index.html')
 
@@ -49,11 +48,12 @@ def results():
 
 @app.route('/results_data')
 def results_data():
-    df = pd.read_csv('data/hockey.csv')
+    df = pd.read_csv('data/games.csv')
     data = {'data': df.to_dict(orient='records')}
     return jsonify(data)
 
 # schedule: books
+# click: books
 
 @app.route('/books')
 def books():
@@ -63,6 +63,8 @@ def books():
         'orconomics': random.choices([20, 0], weights=[0.8, 0.2])[0]
     }
     return render_template('books.html', price=price)
+
+#
 
 @app.route('/fish')
 def fish():
