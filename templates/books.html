@@ -21,27 +21,53 @@
     });
   });
 </script>
+<!-- Task -->
+<div class="accordion" id="accordion">
+  <div class="card">
+    <div class="card-header" id="task">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTask" aria-expanded="false" aria-controls="collapseTask">
+          <b>Click for Challenge</b>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTask" class="collapse" aria-labelledby="task" data-parent="#accordion">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<!-- Content -->
 <div class="book-early">
-  <img src="{{url_for('static', filename='early.jpg')}}" width=100 />
+  <video width="100" autoplay loop>
+     <source src="{{url_for('static', filename='early.mp4')}}" type="video/mp4">
+  </video>
   <h4>Early Riser</h4>
   <p>${{ price.early }}.99 CAD</p>
   <div id="div1"></div>
-  <button id="button1">More Info</button>
+  <button type="button" class="btn btn-primary" id="button1">More Info</button>
 </div>
 <br />
 <div class="book-filthy">
-  <img src="{{url_for('static', filename='filthy.jpg')}}" width=100 />
+  <img src="{{url_for('static', filename='filthy.jpg')}}" width=100>
   <h4>How to Get Filthy Rich in Rising Asia</h4>
   <p>${{ price.filthy }}.99 CAD</p>
   <div id="div2"></div>
-  <button id="button2">More Info</button>
+  <button type="button" class="btn btn-primary" id="button2">More Info</button>
 </div>
 <br />
 <div class="book-orconimics">
-  <img src="{{url_for('static', filename='orconomics.jpg')}}" width=100 />
+  <img src="{{url_for('static', filename='orconomics.jpg')}}" width=100>
   <h4>Orconomics</h4>
   <p>${{ price.orconomics }}.99 CAD</p>
   <div id="div3"></div>
-  <button id="button3">More Info</button>
+  <button type="button" class="btn btn-primary" id="button3">More Info</button>
+  <br />
+  <br />
+  <audio controls>
+    <source src="{{url_for('static', filename='orconomics.mp3')}}" type="audio/mpeg">
+  </audio>
 </div>
 {% endblock %}

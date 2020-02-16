@@ -1,4 +1,5 @@
 import random
+from pathlib import Path
 
 from flask import Flask, jsonify, render_template
 from flask_simplelogin import SimpleLogin, login_required
@@ -16,9 +17,18 @@ SimpleLogin(app, login_checker=config.login_checker)
 def index():
     return render_template('index.html')
 
-@app.route('/about')
-def about():
-    return render_template('about.html')
+@app.route('/challenges')
+def challenges():
+    pages = [
+        'soup',
+        'titans',
+        'spend',
+        'season',
+        'results',
+        'fish',
+        'books'
+    ]
+    return render_template('challenges.html', pages=pages)
 
 # basics
 
@@ -65,25 +75,9 @@ def books():
     }
     return render_template('books.html', price=price)
 
-#
-
 @app.route('/fish')
 def fish():
     return render_template('fish.html')
-
-
-
-@app.route('/scroll')
-def scroll():
-    return render_template('scroll.html')
-
-@app.route('/scroll2')
-def scroll2():
-    return render_template('scroll2.html')
-
-@app.route('/scroll3')
-def scroll3():
-    return render_template('scroll3.html')
 
 if __name__ == '__main__':
     app.run(port=5000, use_reloader=True, debug=True)

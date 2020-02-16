@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Challenges{% endblock %}
+{% block content %}
+<h3>Challenges</h3>
+<div>
+  <ul>
+  {% for page in pages %}
+  <li><a href="{{ page }}">{{ page }}</a></li>
+  {% endfor %}
+  </ul>
+</div>
+{% endblock %}
