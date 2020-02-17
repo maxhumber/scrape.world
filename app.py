@@ -21,7 +21,7 @@ def index():
 
 @app.route("/challenges")
 def challenges():
-    pages = ["soup", "titans", "spend", "season", "results", "fish", "books"]
+    pages = ["soup", "titans", "sports", "fish", "books"]
     return render_template("challenges.html", pages=pages)
 
 
@@ -39,6 +39,11 @@ def titans():
 
 
 # sports
+
+@app.route("/sports")
+def sports():
+    pages = ["results", "season", "spend"]
+    return render_template("sports.html", pages=pages)
 
 
 @app.route("/results")

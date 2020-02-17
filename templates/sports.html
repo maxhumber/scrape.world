@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Challenges{% endblock %}
+{% block title %}Sports{% endblock %}
 {% block content %}
 <!-- Task -->
 <div class="accordion" id="accordion">
@@ -13,19 +13,19 @@
     </div>
     <div id="collapseTask" class="collapse" aria-labelledby="task" data-parent="#accordion">
       <div class="card-body">
-        Scrape the link of every challenge (<a href="https://github.com/maxhumber/scrape.world/blob/master/challenges/challenges.py">solution</a>)
+        Scrape table data from each page (hint: username=<code>admin</code> and password=<code>admin</code>)
       </div>
     </div>
   </div>
 </div>
 <br />
 <!-- Content -->
-<h3>Challenges</h3>
+<h3>Sports</h3>
 <br />
 <div>
   <ol>
   {% for page in pages %}
-  <h4><li><a href="/{{ page }}">/{{ page }}</a></li></h4>
+  <h4><li><a href="{{ page }}">/{{ page }}</a></li></h4>
   {% endfor %}
   </ol>
 </div>
