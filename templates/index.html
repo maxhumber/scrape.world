@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
-{% block title %}scrape.world{% endblock %}
+{% block title %}Scrape World{% endblock %}
 {% block content %}
 <!-- Intro -->
-<h3>Welcome to <i>Scrape World!</i></h3>
+<h3>Welcome to Scrape World</h3>
 <br />
 <p>This website is meant to be scraped.</p>
 <p>The HTML on this website is terrible.</p>
 <p>This is on purpose.</p>
 <p hidden>And totally not because I suck at HTML 😉</p>
-<p>Each page on this website is a <a href="{{url_for('challenges')}}">challenge</a>.
-<p>To accept a challenge click on the "accordion":</p>
+<p>Each page on this website is a challenge.</p>
+<p>To accept a challenge click on the accordion:</p>
 <!-- Task -->
 <div class="accordion" id="accordion">
   <div class="card">
@@ -22,12 +22,11 @@
     </div>
     <div id="collapseTask" class="collapse" aria-labelledby="task" data-parent="#accordion">
       <div class="card-body">
-        Scrape the hidden paragraph tag on this page
+        Scrape the hidden paragraph tag on this page (<a href="https://github.com/maxhumber/scrape.world/blob/master/challenges/index.py">solution</a>)
       </div>
     </div>
   </div>
 </div>
 <br />
-<p>Solutions are available <a href="https://github.com/maxhumber/scrape.world/tree/master/challenges">here</a>.</p>
 <p>Happy Scraping!</p>
 {% endblock %}
