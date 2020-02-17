@@ -40,13 +40,20 @@ def titans():
 
 # sports
 
+
 @app.route("/sports")
 def sports():
-    pages = ["results", "season", "spend"]
+    pages = ["spend", "season", "results"]
     return render_template("sports.html", pages=pages)
 
 
+@app.route("/spend")
+def spend():
+    return render_template("spend.html")
+
+
 @app.route("/results")
+@login_required()
 def results():
     return render_template("results.html")
 
@@ -55,12 +62,6 @@ def results():
 @login_required()
 def season():
     return render_template("season.html")
-
-
-@app.route("/spend")
-@login_required()
-def spend():
-    return render_template("spend.html")
 
 
 @app.route("/results_data")
