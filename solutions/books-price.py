@@ -12,6 +12,7 @@ load_dotenv('solutions/.env')
 
 sender = os.environ.get('GMAIL_USER')
 password = os.environ.get('GMAIL_PASSWORD')
+recipient = os.environ.get('RECIPIENT_EMAIL')
 
 def parse(book):
     name = book.find('h4').text
@@ -39,14 +40,14 @@ def send_email(sender, password):
     msg.set_content(body)
     msg['Subject'] = 'Books Bot'
     msg['From'] = sender
-    msg['To'] = 'max.humber@gmail.com'
+    msg['To'] = recipient
     # send
     server = smtplib.SMTP_SSL('smtp.gmail.com', 465)
     server.login(sender, password)
     server.send_message(msg)
     server.quit()
 
-send_email(sender, password)
+# send_email(sender, password)
 
 while True:
     schedule.every(60).seconds.do(send_email, sender, password)
