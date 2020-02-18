@@ -2,8 +2,8 @@ import re
 from textwrap import indent
 from urllib.request import urlopen
 from gazpacho import get, Soup
-from PIL import Image # $ pip install pillow
-import pytesseract
+from PIL import Image # pip install pillow
+import pytesseract # pip install pytesseract
 
 base = 'http://scrape.world'
 url = base + '/fish'
