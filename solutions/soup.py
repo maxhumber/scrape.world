@@ -4,8 +4,10 @@ url = "http://www.scrape.world/soup"
 html = get(url)
 soup = Soup(html)
 
+fos = soup.find('div', {'class': 'section-speech'})
+
 links = []
-for a in soup.find("a"):
+for a in fos.find("a"):
     try:
         link = a.attrs["href"]
         links.append(link)
