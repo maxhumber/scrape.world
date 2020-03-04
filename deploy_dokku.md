@@ -73,39 +73,30 @@ git push
 
 
 
+**On Server**
 
+9. Spin up a $5 Ubuntu 18.04 server ([DigitalOcean](https://m.do.co/c/2909cd1f3f10) works)...
 
-
-
-
-
-
-
-
-
-**Server**
-
-1. Spin up a $5 server ([DigitalOcean](https://m.do.co/c/2909cd1f3f10) works)...
-2. ssh into it:
+10. ssh into it:
 
 ```
-ssh root@142.93.XXX.104
+ssh root@165.XXX.43.118
 ```
 
-3. (Optional) Update everything:
+11. Update everything:
 
 ```
 sudo apt update
 sudo apt -y upgrade
 ```
 
-4. (Optional) Get "new" monitoring:
+12. Get "new" monitoring (DigitalOcean only):
 
 ```
-curl -sSL https://repos.insights.digitalocean.com/install.sh | sudo bash # skip
+curl -sSL https://repos.insights.digitalocean.com/install.sh | sudo bash
 ```
 
-5. Configure firewall:
+13. Setup firewall:
 
 ````
 ufw app list
@@ -113,7 +104,7 @@ ufw allow OpenSSH
 ufw enable
 ````
 
-5. Add and tweak more firewall garbage [source](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04):
+14. Add some rules ([source](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04)):
 
 ```
 sudo ufw default deny incoming
@@ -124,39 +115,29 @@ sudo ufw allow http
 sudo ufw allow https
 ```
 
-6. Poke another hole in 5000 (`sudo ufw allow PORT`):   
+15. Poke another hole in 5000 (`sudo ufw allow PORT`):   
 
 ```
 sudo ufw allow 5000
 ```
 
-7. Install dokku:
+16. Install dokku:
 
 ```
 wget https://raw.githubusercontent.com/dokku/dokku/v0.19.13/bootstrap.sh
 sudo DOKKU_TAG=v0.19.13 bash bootstrap.sh
 ```
 
-8. Navigate to the machine IP address in a browser and add your ssh key
+17. Navigate to the machine IP address in a browser and add your ssh key
 
 ```
 # to copy and paste:
 cat .ssh/id_rsa.pub
 ```
 
-9. Add server IPv4 address to the hostname for now:
+18. Add server IPv4 address to the hostname for now:
 
-> 138.197.XXX.220
-
-
-
-**On the Sever**
-
-18. ssh back into the server (if you closed it):
-
-```
-ssh root@142.93.XXX.104
-```
+> 165.XXX.43.118
 
 19. Create a dokku app:
 
@@ -172,21 +153,21 @@ dokku domains:enable scrapeworld
 
 
 
-**On local machine**
+**On Laptop**
 
-21. Go back to the app and add dokku as a remote:
+21. Add dokku as a remote:
 
 ```
-git remote add dokku dokku@<SERVER IPv4 ADDRESS>:scrapeworld
+git remote add dokku dokku@165.XXX.43.118:scrapeworld
 ```
 
-22. Verify the remote is added:
+22. Verify that the remote got added:
 
 ```
 git remote -v
 ```
 
-23. Push it up:
+23. Push it up (for every new change just run these commands):
 
 ```
 git add .
