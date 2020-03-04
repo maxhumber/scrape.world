@@ -19,7 +19,7 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
 ```
 
-1. Setup a damn environment (you should have already done this):
+1. Setup a damn environment (if you don't have one already):
 
 ```
 python -m venv .venv
