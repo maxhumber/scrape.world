@@ -1,125 +1,136 @@
-#### Dokku
+#### Deploy: Dokku
 
-**Digital Ocean**
+**On Digital Ocean**
 
-1. Spin up a $5 sever
-2. 
+[source](https://www.linode.com/docs/applications/containers/deploy-a-flask-application-with-dokku/)
 
-
-
-#### App setup
-
-Setup a blank repo (it's called box in this example):
+1. Spin up a $5 sever...
+2. ssh into it:
 
 ```
-git clone git@github.com:maxhumber/box.git
-cd box
+ssh root@142.93.XXX.104
 ```
 
-Setup a damn environment
+3. (Optional) Update everything:
+
+```
+sudo apt update
+sudo apt -y upgrade
+```
+
+4. (Optional) Get "new" monitoring:
+
+```
+curl -sSL https://repos.insights.digitalocean.com/install.sh | sudo bash # skip
+```
+
+5. Configure firewall:
+
+````
+ufw app list
+ufw allow OpenSSH
+ufw enable
+````
+
+5. Add and tweak more firewall garbage [source](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04):
+
+```
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow ssh
+sudo ufw allow 22
+sudo ufw allow http 
+sudo ufw allow https
+```
+
+6. Poke another hole in 5000 (`sudo ufw allow PORT`):   
+
+```
+sudo ufw allow 5000
+```
+
+7. Install dokku:
+
+```
+wget https://raw.githubusercontent.com/dokku/dokku/v0.19.13/bootstrap.sh
+sudo DOKKU_TAG=v0.19.13 bash bootstrap.sh
+```
+
+8. Navigate to the machine IP address in a browser and add your ssh key
+
+```
+# to copy and paste:
+cat .ssh/id_rsa.pub
+```
+
+9. Skip the Hostname for now... just put:
+
+> localhost 
+
+
+
+**On local machine**
+
+10. Setup a damn environment:
 
 ```
 python -m venv .venv
+```
+
+11. Activate it:
+
+```
 source .venv/bin/activate
-pip install flask gunicorn
+```
+
+12. Install and freeze what you need:
+
+```
+pip install gunicorn flask flask_simplelogin pandas
 pip freeze > requirements.txt
-echo ".venv" > .gitignore
 ```
 
-Create a stupid flask app
+13. Make sure it works locally:
 
 ```
-touch hello.py
+python app.py
 ```
 
-Fill it with:
+14. The bottom of your flask app should look like:
 
 ```
-import os
-
-from flask import Flask
-
-app = Flask(__name__)
-
-@app.route('/')
-def hello():
-    return 'Hello World!'
-
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
 ```
 
-Create a Procfile
+15. Specify a python `runtime.txt`:
 
 ```
-touch Profile
+python --version
+echo "python-3.7.4" >> runtime.txt
 ```
 
-Fill it with 
+16. Create a `Procfile`:
 
 ```
-web: gunicorn hello:app --workers=4
+echo "web: gunicorn app:app --workers=4" >> Procfile
 ```
 
-Push up to GitHub 
+17. Push everything up to GitHub:
+
+```
+git add .
+git commit -m '🚀'
+git push
+```
+
+
 
 
 
 #### Dokku Deploy
-
-[source](https://www.linode.com/docs/applications/containers/deploy-a-flask-application-with-dokku/)
-
-1. Go get a server.
-
-2. ssh into it:
-
-   ```
-   ssh root@138.197.133.51
-   ```
-
-3. Configure firewall:
-
-   ````
-   ufw app list
-   ufw allow OpenSSH
-   ufw enable
-   ````
-
-4. More firewall garbage [source](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-with-ufw-on-ubuntu-18-04):
-
-   ```
-   sudo ufw default deny incoming
-   sudo ufw default allow outgoing
-   sudo ufw allow ssh
-   sudo ufw allow 22
-   sudo ufw allow http 
-   sudo ufw allow https
-   ```
-
-5. If you need more ports: `sudo ufw allow PORT` for the port in question.   
-
-   ```
-   sudo ufw allow 5000
-   ```
-
-6. Install dokku:
-
-   ```
-   # for debian systems, installs dokku via apt-get
-   wget https://raw.githubusercontent.com/dokku/dokku/v0.19.13/bootstrap.sh
-   sudo DOKKU_TAG=v0.19.13 bash bootstrap.sh
-   # go to your server's IP and follow the web installer 
-   ```
-
-7. Navigate to the machine IP address in a browser and add your ssh key
-
-   ```
-   cat .ssh/id_rsa.pub
-   ```
-
-8. Host name? Not sure: `ubuntu-s-1vcpu-1gb-tor1-01`
 
 
 
