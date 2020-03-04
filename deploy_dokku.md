@@ -31,33 +31,39 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-12. Install and freeze what you need:
+3. Install and freeze what you need:
 
 ```
 pip install gunicorn flask flask_simplelogin pandas
 pip freeze > requirements.txt
 ```
 
-13. Make sure it works locally:
+4. Make sure it still works locally:
 
 ```
 python app.py
 ```
 
-Specify a python `runtime.txt`:
+5. Specify a python `runtime.txt`:
 
 ```
 python --version
 echo "python-3.7.4" >> runtime.txt
 ```
 
-16. Create a `Procfile`:
+6. Deactivate your venv (Optional):
+
+```
+deactivate
+```
+
+7. Create a `Procfile`:
 
 ```
 echo "web: gunicorn app:app --workers=4" >> Procfile
 ```
 
-17. Push everything up to GitHub:
+8. Push everything up to GitHub:
 
 ```
 git add .
