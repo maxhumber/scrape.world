@@ -1,8 +1,8 @@
 #### Deploy: Dokku
 
-**On Digital Ocean**
+Inspired by: [link](https://www.linode.com/docs/applications/containers/deploy-a-flask-application-with-dokku/)
 
-[source](https://www.linode.com/docs/applications/containers/deploy-a-flask-application-with-dokku/)
+**On Digital Ocean**
 
 1. Spin up a $5 sever...
 2. ssh into it:
@@ -128,19 +128,47 @@ git push
 
 
 
+**On the Sever**
 
-
-#### Dokku Deploy
-
-
-
-Go back to your app and try to add dokku as a remote:
+18. ssh back into the server (if you closed it):
 
 ```
-git remote add dokku dokku@example.com:box
+ssh root@142.93.XXX.104
+```
+
+19. Create a dokku app:
+
+```
+dokku apps:create scrapeworld
+```
+
+20. Enable VHOST:
+
+```
+dokku domains:enable scrapeworld
 ```
 
 
+
+**On local machine**
+
+21. Go back to the app and add dokku as a remote:
+
+```
+git remote add dokku dokku@<SERVER IPv4 ADDRESS>:scrapeworld
+```
+
+22. Verify the remote is added:
+
+```
+git remote -v
+```
+
+23. Push it up:
+
+```
+
+```
 
 
 
