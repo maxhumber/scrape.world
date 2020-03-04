@@ -175,8 +175,42 @@ git commit -m '🤞'
 git push dokku master
 ```
 
-24. Visit the server address to make sure it works!
+24. Hit the server address (`165.XXX.43.118`) to make sure it works!
 
-25. Add a custom domain:
-26. 
 
+
+#### Bonus: Custom Domain Instructions
+
+
+
+**On Server**
+
+1. Install the Let’s Encrypt plugin for Dokku:
+
+   ```
+   sudo dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
+   ```
+
+2. Set the `DOKKU_LETSENCRYPT_EMAIL` environment variable to the email for Let’s Encrypt:
+
+   ```
+   dokku config:set scrapeworld DOKKU_LETSENCRYPT_EMAIL=first.last@email.com
+   ```
+
+3. Add the application and domain (http://`scrape.world` is the actual domain!):
+
+   ```
+   dokku domains:add scrapeworld scrape.world
+   ```
+
+4. Create the SSL certificate. NGINX will automatically start serving the application over HTTPS on port 443:
+
+   ```
+   dokku letsencrypt scrapeworld
+   ```
+
+5. Run this as a cron job so the certificate will renew automatically:.
+
+   ```
+   dokku letsencrypt:cron-job --add
+   ```
