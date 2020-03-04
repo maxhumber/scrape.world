@@ -1,10 +1,85 @@
+
+
+![dokku](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.rodSWxgGl1-tlKWYKucBEQAAAA%26pid%3DApi&f=1)
+
 #### Deploy: Dokku
 
 Inspired by: [link](https://www.linode.com/docs/applications/containers/deploy-a-flask-application-with-dokku/)
 
-**On Digital Ocean**
 
-1. Spin up a $5 sever...
+
+**On Laptop**
+
+0. Build the damn flask app... the bottom of it should look like:
+
+```
+if __name__ == '__main__':
+    # Bind to PORT if defined, otherwise default to 5000.
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
+```
+
+1. Setup a damn environment (you should have already done this):
+
+```
+python -m venv .venv
+```
+
+2. Activate it:
+
+```
+source .venv/bin/activate
+```
+
+12. Install and freeze what you need:
+
+```
+pip install gunicorn flask flask_simplelogin pandas
+pip freeze > requirements.txt
+```
+
+13. Make sure it works locally:
+
+```
+python app.py
+```
+
+Specify a python `runtime.txt`:
+
+```
+python --version
+echo "python-3.7.4" >> runtime.txt
+```
+
+16. Create a `Procfile`:
+
+```
+echo "web: gunicorn app:app --workers=4" >> Procfile
+```
+
+17. Push everything up to GitHub:
+
+```
+git add .
+git commit -m '🚀'
+git push
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+**Server**
+
+1. Spin up a $5 server ([DigitalOcean](https://m.do.co/c/2909cd1f3f10) works)...
 2. ssh into it:
 
 ```
@@ -63,68 +138,9 @@ sudo DOKKU_TAG=v0.19.13 bash bootstrap.sh
 cat .ssh/id_rsa.pub
 ```
 
-9. Skip the Hostname for now... just put:
+9. Add server IPv4 address to the hostname for now:
 
-> localhost 
-
-
-
-**On local machine**
-
-10. Setup a damn environment:
-
-```
-python -m venv .venv
-```
-
-11. Activate it:
-
-```
-source .venv/bin/activate
-```
-
-12. Install and freeze what you need:
-
-```
-pip install gunicorn flask flask_simplelogin pandas
-pip freeze > requirements.txt
-```
-
-13. Make sure it works locally:
-
-```
-python app.py
-```
-
-14. The bottom of your flask app should look like:
-
-```
-if __name__ == '__main__':
-    # Bind to PORT if defined, otherwise default to 5000.
-    port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
-```
-
-15. Specify a python `runtime.txt`:
-
-```
-python --version
-echo "python-3.7.4" >> runtime.txt
-```
-
-16. Create a `Procfile`:
-
-```
-echo "web: gunicorn app:app --workers=4" >> Procfile
-```
-
-17. Push everything up to GitHub:
-
-```
-git add .
-git commit -m '🚀'
-git push
-```
+> 138.197.XXX.220
 
 
 
@@ -167,8 +183,13 @@ git remote -v
 23. Push it up:
 
 ```
-
+git add .
+git commit -m '🤞'
+git push dokku master
 ```
 
+24. Visit the server address to make sure it works!
 
+25. Add a custom domain:
+26. 
 
