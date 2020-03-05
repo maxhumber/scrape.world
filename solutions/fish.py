@@ -5,7 +5,7 @@ from gazpacho import get, Soup
 from PIL import Image # pip install pillow
 import pytesseract # pip install pytesseract
 
-base = 'http://scrape.world'
+base = 'https://scrape.world'
 url = base + '/fish'
 html = get(url)
 soup = Soup(html)

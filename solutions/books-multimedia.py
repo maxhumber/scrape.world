@@ -6,7 +6,7 @@ from gazpacho import get, Soup
 dir = 'media'
 Path(dir).mkdir(exist_ok=True)
 
-base = 'http://scrape.world'
+base = 'https://scrape.world'
 url = base + '/books'
 html = get(url)
 soup = Soup(html)

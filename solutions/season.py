@@ -3,7 +3,7 @@ import pandas as pd
 from selenium.webdriver import Firefox
 from selenium.webdriver.firefox.options import Options
 
-url = "http://www.scrape.world/season"
+url = "https://scrape.world/season"
 
 options = Options()
 options.headless = True

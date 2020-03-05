@@ -1,6 +1,6 @@
 from gazpacho import get, Soup
 
-url = "http://www.scrape.world/titans"
+url = "https://scrape.world/titans"
 
 html = get(url)
 soup = Soup(html)

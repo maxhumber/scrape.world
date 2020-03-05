@@ -20,7 +20,7 @@ def parse(book):
     return name, price
 
 def fetch_sale():
-    url = 'http://scrape.world/books'
+    url = 'https://scrape.world/books'
     html = get(url)
     soup = Soup(html)
     books_raw = soup.find('div', {'class': 'book-'})
