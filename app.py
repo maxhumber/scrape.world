@@ -91,6 +91,11 @@ def fish():
     return render_template("fish.html")
 
 
+@app.route("/loaderio-217048ac16b29b838078bfdd254c773c")
+def loaderio():
+    return 'loaderio-217048ac16b29b838078bfdd254c773c'
+
+
 if __name__ == '__main__':
     # Bind to PORT if defined, otherwise default to 5000.
     port = int(os.environ.get('PORT', 5000))
