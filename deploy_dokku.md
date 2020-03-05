@@ -111,7 +111,7 @@ sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw allow ssh
 sudo ufw allow 22
-sudo ufw allow http 
+sudo ufw allow http
 sudo ufw allow https
 ```
 
@@ -183,34 +183,46 @@ git push dokku master
 
 
 
+**On Namecheap**
+
+1. Add the following DNS records:
+
+| Type                | Host | Value                               | TTL       |
+| ------------------- | ---- | ----------------------------------- | --------- |
+| A Record            | @    | 165.XXX.43.118                      | Automatic |
+| URL Redirect Record | www  | http://scrape.world (Permanent 301) |           |
+| A Record            | *    | 165.XXX.43.118                      | Automatic |
+
 **On Server**
 
-1. Install the Let’s Encrypt plugin for Dokku:
+2. ssh into `root@165.XXX.43.118`
 
-   ```
-   sudo dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
-   ```
+3. Install the Let’s Encrypt plugin for Dokku:
 
-2. Set the `DOKKU_LETSENCRYPT_EMAIL` environment variable to the email for Let’s Encrypt:
+```
+sudo dokku plugin:install https://github.com/dokku/dokku-letsencrypt.git
+```
 
-   ```
-   dokku config:set scrapeworld DOKKU_LETSENCRYPT_EMAIL=first.last@email.com
-   ```
+4. Set the `DOKKU_LETSENCRYPT_EMAIL` environment variable to the email for Let’s Encrypt:
 
-3. Add the application and domain (http://`scrape.world` is the actual domain!):
+```
+dokku config:set scrapeworld DOKKU_LETSENCRYPT_EMAIL=first.last@email.com
+```
 
-   ```
-   dokku domains:add scrapeworld scrape.world
-   ```
+5. Add the application and domain (http://`scrape.world` is the actual domain!):
 
-4. Create the SSL certificate. NGINX will automatically start serving the application over HTTPS on port 443:
+```
+dokku domains:add scrapeworld scrape.world
+```
 
-   ```
-   dokku letsencrypt scrapeworld
-   ```
+6. Create the SSL certificate. NGINX will automatically start serving the application over HTTPS on port 443:
 
-5. Run this as a cron job so the certificate will renew automatically:.
+```
+dokku letsencrypt scrapeworld
+```
 
-   ```
-   dokku letsencrypt:cron-job --add
-   ```
+7. Run this as a cron job so the certificate will renew automatically:.
+
+```
+dokku letsencrypt:cron-job --add
+```
