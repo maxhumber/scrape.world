@@ -91,7 +91,7 @@ def fish():
     return render_template("fish.html")
 
 
-@app.route("/loaderio-217048ac16b29b838078bfdd254c773c")
+@app.route("/loaderio-217048ac16b29b838078bfdd254c773c/")
 def loaderio():
     return 'loaderio-217048ac16b29b838078bfdd254c773c'
 
