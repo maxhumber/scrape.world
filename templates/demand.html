@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Fish{% endblock %}
+{% block title %}Demand{% endblock %}
 {% block content %}
 <!-- Task -->
 <div class="accordion" id="accordion">
@@ -13,7 +13,7 @@
     </div>
     <div id="collapseTask" class="collapse" aria-labelledby="task" data-parent="#accordion">
       <div class="card-body">
-        Get predicted energy data for the next 7 days (<a href="https://github.com/maxhumber/scrape.world/blob/master/solutions/demand.py">solution</a>)
+        Retrive the forecasted energy demand for next 7 days should the weather hold at 21 degrees (<a href="https://github.com/maxhumber/scrape.world/blob/master/solutions/demand.py">solution</a>)
       </div>
     </div>
   </div>
@@ -21,6 +21,15 @@
 <br />
 <!-- Content -->
 <div class="d-flex justify-content-center">
-  You have to send it to post requests
+  POST requests to this endpoint should be adhere to the following format:
+</div>
+<br />
+<br />
+<div class="d-flex justify-content-center">
+  <pre style="margin: 0; line-height: 125%">data <span style="color: #333333">=</span> {
+    <span style="background-color: #fff0f0">&quot;date&quot;</span>: <span style="color: #007020">str</span>(datetime<span style="color: #333333">.</span>datetime<span style="color: #333333">.</span>now()),
+    <span style="background-color: #fff0f0">&quot;temperature&quot;</span>: <span style="color: #0000DD; font-weight: bold">21</span>
+}
+</pre></div>
 </div>
 {% endblock %}

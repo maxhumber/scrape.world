@@ -99,7 +99,7 @@ def demand():
             'date': [pd.Timestamp(request.json.get('date'))],
             'temperature': [float(request.json.get('temperature'))]
         })
-        prediction = pipe.predict(new)[0] + random.normalvariate(0, 300)
+        prediction = pipe.predict(new)[0]
         mw = round(prediction, -1)
         return jsonify({'demand': mw})
     else:
