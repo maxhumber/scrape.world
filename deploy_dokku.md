@@ -173,7 +173,7 @@ git remote -v
 ```
 git add .
 git commit -m '🤞'
-git push dokku master
+git push dokku
 ```
 
 24. Hit the server address (`165.XXX.43.118`) to make sure it works!
