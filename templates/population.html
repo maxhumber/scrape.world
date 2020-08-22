@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}Fish{% endblock %}
+{% block content %}
+<!-- Style -->
+<style>
+#infinite-list {
+  /* We need to limit the height and show a scrollbar */
+  max-width: 900px;
+  height: 400px;
+  overflow: auto;
+}
+
+/* Optional eye candy below: */
+li {
+  padding: 10px;
+  list-style-type: none;
+}
+li:hover {
+  background: #ccc;
+}
+</style>
+
+<!-- Task -->
+<div class="accordion" id="accordion">
+  <div class="card">
+    <div class="card-header" id="task">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTask" aria-expanded="false" aria-controls="collapseTask">
+          <b>Show Challenge</b>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTask" class="collapse" aria-labelledby="task" data-parent="#accordion">
+      <div class="card-body">
+        Scrape 365 days of bacteria population (<a href="https://github.com/maxhumber/scrape.world/blob/master/solutions/population.py">solution</a>)
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+
+<!-- Content -->
+<div class="d-flex justify-content-center">
+  <h1>Bacteria Population</h1>
+</div>
+<div class="d-flex justify-content-center">
+  <ul id='infinite-list'>
+  </ul>
+</div>
+
+<!-- Script -->
+<script>
+var listElm = document.querySelector('#infinite-list');
+
+// Add 20 items.
+var nextItem = 1;
+var loadMore = function() {
+  for (var i = 0; i < 20; i++) {
+    var item = document.createElement('li');
+    var value = 100 + (Math.sin(nextItem) * 25) + (Math.random() * 10);
+    value = Math.round(value / 1) * 1;
+    item.innerText = 'Day ' + nextItem + ' Population ' + value
+    nextItem++;
+    listElm.appendChild(item);
+  }
+}
+
+// Detect when scrolled to bottom.
+listElm.addEventListener('scroll', function() {
+  if (listElm.scrollTop + listElm.clientHeight >= listElm.scrollHeight) {
+    loadMore();
+  }
+});
+
+// Initially load some items.
+loadMore();
+</script>
+
+{% endblock %}

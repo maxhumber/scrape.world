@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}Fish{% endblock %}
+{% block content %}
+<!-- Task -->
+<div class="accordion" id="accordion">
+  <div class="card">
+    <div class="card-header" id="task">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTask" aria-expanded="false" aria-controls="collapseTask">
+          <b>Show Challenge</b>
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTask" class="collapse" aria-labelledby="task" data-parent="#accordion">
+      <div class="card-body">
+        Get predicted energy data for the next 7 days (<a href="https://github.com/maxhumber/scrape.world/blob/master/solutions/demand.py">solution</a>)
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+<!-- Content -->
+<div class="d-flex justify-content-center">
+  You have to send it to post requests
+</div>
+{% endblock %}

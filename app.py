@@ -1,18 +1,23 @@
 import os
 from pathlib import Path
 import random
+import pickle
 
-from flask import Flask, jsonify, render_template
+from flask import Flask, request, jsonify, render_template
 from flask_simplelogin import SimpleLogin, login_required
 import pandas as pd
 
 import config
+from utils import DateEncoder
+
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = config.secret
 SimpleLogin(app, login_checker=config.login_checker)
 
-# home
+
+with open('static/pipe.pkl', 'rb') as f:
+    pipe = pickle.load(f)
 
 
 @app.route("/")
@@ -22,11 +27,8 @@ def index():
 
 @app.route("/challenges")
 def challenges():
-    pages = ["soup", "titans", "sports", "fish", "books"]
+    pages = ["soup", "titans", "sports", "fish", "books", "population", "demand"]
     return render_template("challenges.html", pages=pages)
-
-
-# basics
 
 
 @app.route("/soup")
@@ -37,9 +39,6 @@ def soup():
 @app.route("/titans")
 def titans():
     return render_template("titans.html")
-
-
-# sports
 
 
 @app.route("/sports")
@@ -72,9 +71,6 @@ def results_data():
     return jsonify(data)
 
 
-# books
-
-
 @app.route("/books")
 def books():
     sale = [0.8, 0.2]
@@ -89,6 +85,25 @@ def books():
 @app.route("/fish")
 def fish():
     return render_template("fish.html")
+
+
+@app.route("/population")
+def population():
+    return render_template("population.html")
+
+
+@app.route('/demand', methods=['GET', 'POST'])
+def demand():
+    if request.method == 'POST':
+        new = pd.DataFrame({
+            'date': [pd.Timestamp(request.json.get('date'))],
+            'temperature': [float(request.json.get('temperature'))]
+        })
+        prediction = pipe.predict(new)[0] + random.normalvariate(0, 300)
+        mw = round(prediction, -1)
+        return jsonify({'demand': mw})
+    else:
+        return render_template("demand.html")
 
 
 @app.route("/loaderio-217048ac16b29b838078bfdd254c773c/")

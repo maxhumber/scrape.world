@@ -6,6 +6,7 @@ users = {
     "admin": {"password": "admin"},
     "oreilly": {"password": "letmescrape"},
     "max": {"password": "i-like-gazpacho"},
+    "odsc": {"password": "odsc"}
 }
 
 

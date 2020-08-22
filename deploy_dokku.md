@@ -34,13 +34,14 @@ source .venv/bin/activate
 3. Install and freeze what you need:
 
 ```
-pip install gunicorn flask flask_simplelogin pandas
+pip install gunicorn flask flask_simplelogin pandas sklearn_pandas scikit-learn
 pip freeze > requirements.txt
 ```
 
-4. Make sure it still works locally:
+4. Rebuild the model and make sure it still works locally:
 
 ```
+python model.py
 python app.py
 ```
 
