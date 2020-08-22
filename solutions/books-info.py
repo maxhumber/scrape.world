@@ -17,6 +17,6 @@ time.sleep(0.5)
 html = browser.page_source
 soup = Soup(html)
 
-info = soup.find('div', {'id': 'div2'}).text
+info = soup.find("div", {"id": "div2"}).text
 
 print(info)

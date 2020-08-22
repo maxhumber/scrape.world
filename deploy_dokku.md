@@ -48,10 +48,10 @@ python app.py
 
 ```
 python --version
-echo "python-3.7.4" >> runtime.txt
+echo "python-3.7.9" >> runtime.txt
 ```
 
-6. Deactivate your venv (Optional):
+6. (Optional) Deactivate your venv:
 
 ```
 deactivate
