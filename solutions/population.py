@@ -5,7 +5,6 @@ from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
 
 base = "https://scrape.world/"
-base = "http://localhost:5000/"
 endpoint = "population"
 url = base + endpoint
 

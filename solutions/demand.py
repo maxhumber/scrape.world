@@ -13,7 +13,6 @@ def post(url, data):
     return data
 
 url = "https://scrape.world/demand"
-url = "http://127.0.0.1:5000/demand"
 
 start = pd.Timestamp('today')
 end = start + pd.Timedelta('7 days')
