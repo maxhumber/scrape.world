@@ -1,11 +1,9 @@
-# TODO
-
 from gazpacho import Soup
 import pandas as pd
 from selenium.webdriver import Firefox
 from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.common.keys import Keys
 
-# TODO
 base = "https://scrape.world/"
 base = "http://localhost:5000/"
 endpoint = "population"
@@ -16,20 +14,22 @@ options.headless = True
 browser = Firefox(executable_path="/usr/local/bin/geckodriver", options=options)
 browser.get(url)
 
+poplist = browser.find_element_by_id('infinite-list')
 
+days = 365
+n = 0
+while n < 365:
+    browser.execute_script('arguments[0].scrollTop = arguments[0].scrollHeight', poplist)
+    html = browser.page_source
+    soup = Soup(html)
+    n = len(soup.find('ul', {'id': 'infinite-list'}).find('li'))
 
-# username
+lis = soup.find('ul', {'id': 'infinite-list'}).find('li')
 
-username = browser.find_element_by_id("username")
-username.clear()
-username.send_keys("admin")
+def parse_li(li):
+    day, population = li.text.split(' Population ')
+    population = int(population)
+    day = int(day.split('Day ')[-1])
+    return {'day': day, 'population': population}
 
-# password
-
-password = browser.find_element_by_name("password")
-password.clear()
-password.send_keys("admin")
-
-# submit
-
-browser.find_element_by_xpath("/html/body/div/div/form/div/input[3]").click()
+population = [parse_li(li) for li in lis][:days]
