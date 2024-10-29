@@ -19,5 +19,5 @@ six==1.16.0
 sklearn-pandas==2.2.0
 threadpoolctl==3.5.0
 tzdata==2024.1
-Werkzeug==3.0.3
+Werkzeug==3.0.6
 WTForms==3.1.2
